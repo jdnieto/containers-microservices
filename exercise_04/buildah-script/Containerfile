@@ -1,0 +1,57 @@
+#INSTRUCTION value
+
+# Base Image
+FROM registry.centos.org/centos/centos:8
+## FROM centos:8 (search in all configured registries)
+## FROM scratch (you should add the hierarchy filesystem)
+
+# METADATA LABELS
+LABEL maintainer="David Martin <david@dmartin.es>" \
+      distribution="centos" \
+      version="8" \
+      description="This image is intended to demonstrate image creation based on Containerfile"
+
+# METADATA ENVIRONMENT
+ENV PATH=$PATH:/ \
+    NAME=httpd
+
+# EXECUTING COMMANDS
+RUN dnf install -y httpd --setopt=install_weak_deps=False --setopt=tsflags=nodocs && \
+    dnf clean all && \
+    useradd -u 10001 httpd-user && \
+    chgrp -R httpd-user /var/lib/httpd /var/www /var/log/httpd /run/httpd && \
+    chmod -R g=u /var/lib/httpd /var/www /var/log/httpd /run/httpd
+
+# ADDING FILES
+## COPY (local files) (if origin is tar, dest is tar)
+## ADD (local files, remote files, http, ftp) (if origin is tar, dest is unpacked)
+COPY web.html /var/www/html/index.html
+# COPY dir remote-dir (result=remote-dir/dir)
+# COPY dir/ remote-dir (result=remote-dir/content)
+
+ADD entrypoints.tar /
+
+
+# PORTS DEFINITION
+RUN sed -i 's/Listen.*/Listen 8080/' /etc/httpd/conf/httpd.conf
+EXPOSE 8080
+
+# SET USER TO RUN COMMANDS
+USER httpd-user
+# RUN echo "httpd-user was here" > /var/www/html/user.html
+## CHANGE USER AGAIN
+# USER root
+# RUN dnf update -y
+# USER httpd-user
+
+
+# ENTRYPOINT DEFINITION
+ENTRYPOINT ["/container-entrypoint.sh"]
+## Default entrypoint: ENTRYPOINT ['/bin/sh', '-c']
+## if ENTRYPOINT /bin/ping and CMD localhost then `podman run -it ping-image /bin/bash`
+## result: as ENTRYPOINT /bin/ping ad CMD /bin/bash ==== ERROR ping /bin/bash: no host
+
+
+# ENTRYPOINT ARGS
+CMD ["run-apache.sh"]
+
