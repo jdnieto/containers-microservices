@@ -1,0 +1,12 @@
+APP_NAME=qaapp
+DB_DIR=/tmp/db-qa
+DB_CONTAINER=qaapp-db
+DB_IMAGE=localhost/database
+DB_ROOT_PASS=r00tpa55
+DB_NAME=qaapp
+BACK_NAME=qaapp-back
+BACK_IMAGE=localhost/backend
+API_KEY=my53cr37
+FRONT_NAME=qaapp-front
+FRONT_IMAGE=localhost/frontend
+FRONT_PORT=8888

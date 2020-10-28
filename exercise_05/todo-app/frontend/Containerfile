@@ -10,7 +10,7 @@ RUN yum install -y --setopt=tsflags=nodocs epel-release yum-utils http://rpms.re
 
 COPY css_content/ /var/www/html/css
 COPY web_app /var/www/html/
-
+COPY run-apache.sh /
 EXPOSE 80
 
-CMD /usr/sbin/httpd -DFOREGROUND
+CMD /run-apache.sh

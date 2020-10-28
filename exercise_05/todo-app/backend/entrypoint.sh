@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
 echo "Waiting for database..."
 
@@ -8,4 +9,4 @@ done
 
 
 echo "Database started"
-python manage.py run -h 0.0.0.0 -p 80
+python /usr/src/myapp/manage.py run -h 0.0.0.0 -p 8080

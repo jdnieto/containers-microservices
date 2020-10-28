@@ -1,0 +1,12 @@
+APP_NAME=prodapp
+DB_DIR=/tmp/db-prod
+DB_CONTAINER=prodapp-db
+DB_IMAGE=localhost/database
+DB_ROOT_PASS=r00tpa55
+DB_NAME=prodapp
+BACK_NAME=prodapp-back
+BACK_IMAGE=localhost/backend
+API_KEY=my53cr37
+FRONT_NAME=prodapp-front
+FRONT_IMAGE=localhost/frontend
+FRONT_PORT=80

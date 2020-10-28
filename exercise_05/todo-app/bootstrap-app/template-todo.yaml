@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ${APP_NAME}
+spec:
+  volumes:
+    - name: db
+      hostPath:
+        path: ${DB_DIR}
+  containers:
+    - name: ${DB_CONTAINER}
+      image: ${DB_IMAGE}
+      env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: ${DB_ROOT_PASS}
+        - name: MYSQL_DATABASE
+          value: ${DB_NAME}
+      volumeMounts:
+        - name: db
+          mountPath: /var/lib/mysql
+    - name: ${BACK_NAME}
+      image: ${BACK_IMAGE}
+      env:
+        - name: APP_SETTINGS
+          value: project.DevelopmentConfig
+        - name: API_KEY
+          value: ${API_KEY}
+        - name: DATABASE_URL
+          value: 'mysql+pymysql://root:${DB_ROOT_PASS}@localhost/${DB_NAME}'
+        - name: DATABASE_HOST
+          value: localhost
+    - name: ${FRONT_NAME}
+      image: ${FRONT_IMAGE}
+      env:
+        - name: BACKEND_HOST
+          value: "localhost:8080"
+        - name: API_KEY
+          value: ${API_KEY}
+      ports:
+        - name: 80/TCP
+          containerPort: 80
+          hostPort: ${FRONT_PORT}
+          protocol: tcp

@@ -2,6 +2,7 @@ import os
 import datetime
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from project.config import *
 
 # instantiate the db
 db = SQLAlchemy()
