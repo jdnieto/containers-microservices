@@ -1,0 +1,35 @@
+version: "2"
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "8080:80"
+    environment:
+      - API_KEY=${API_KEY}
+      - BACKEND_HOST=${BACKEND_HOST}
+    links:
+      - backend:${BACKEND_HOST}
+    depends_on:
+      - backend
+  backend:
+    build: ./backend
+    environment:
+      - APP_SETTINGS=project.config.${CONFIG}
+      - API_KEY=${API_KEY}
+      - DATABASE_URL=mysql+pymysql://${DB_USER}:${DB_PASSWORD}@${DATABASE_HOST}:3306/${DB_NAME}
+      - DATABASE_HOST=${DATABASE_HOST}
+      - FLASK_DEBUG=1
+    links:
+      - database:${DATABASE_HOST}
+    depends_on:
+      - database
+  database:
+    build: ./database
+    volumes:
+      - ./database_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+

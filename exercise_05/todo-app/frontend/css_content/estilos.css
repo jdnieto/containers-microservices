@@ -1,0 +1,91 @@
+*{
+  font-family: 'Roboto';
+}
+.contenido{
+  max-width: 500px;
+  margin: auto;
+  font-size: x-large;
+}
+.cabecera {
+  overflow: hidden;
+  background-color: #242128;
+  color: white;
+  padding: 20px 10px;
+	text-align: center;
+}
+form {
+	width: 50%; 
+	margin: 30px auto; 
+	border-radius: 5px; 
+	padding: 10px;
+	border: 1px solid #242128;
+}
+form p {
+	color: #2c61a2;
+	margin: 0px;
+	text-align: center;
+}
+.tarea {
+	width: 75%;
+	height: 15px; 
+	padding: 10px;
+	border: 2px solid #242128;
+	display: block;
+	margin: 0 auto;
+}
+.agregar {
+	height: 39px;
+	background: #2e8ad5;
+	border: 2px solid #242128;
+	border-radius: 5px; 
+	padding: 5px 20px;
+	display: block;
+	margin: 0 auto;
+}
+
+table {
+    width: 50%;
+    margin: 30px auto;
+    border-collapse: collapse;
+}
+
+tr {
+	border-bottom: 1px solid #cbcbcb;
+}
+
+th {
+	font-size: 19px;
+	color: #242128;
+}
+
+th, td{
+	border: none;
+    height: 30px;
+    padding: 2px;
+}
+
+tr:hover {
+	background: #2e8ad5;
+}
+
+.task {
+	text-align: left;
+}
+
+.borrar{
+	text-align: center;
+	margin: auto;
+	background: #2c61a2;
+	color: white;
+	font-size: smaller;
+	border: 2px solid #242128;
+	border-radius: 5px; 
+	padding: 5px 20px;
+}
+.borrar a{
+	color: white;
+	background: #a52a2a;
+	padding: 1px 6px;
+	border-radius: 3px;
+	text-decoration: none;
+}
