@@ -1,5 +1,5 @@
 FROM centos:7
-MAINTAINER David Martín <davidaletiasoluciones.com>
+MAINTAINER David Martín <david@aletiasoluciones.com>
 
 LABEL version="1.0" PHP="7.1"
 
