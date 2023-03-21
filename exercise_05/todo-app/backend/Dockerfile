@@ -1,11 +1,11 @@
 FROM python:3.6.4
 MAINTAINER David Martín <david@aletiasoluciones.com>
 # install packages
-RUN apt-get update -yqq && apt-get install -yqq --no-install-recommends netcat mysql-client && apt-get -q clean
+RUN apt-get update --force-yes -yqq && apt-get install --force-yes -yqq --no-install-recommends netcat mysql-client && apt-get -q clean
 # add requirements
 COPY ./requirements.txt /tmp/requirements.txt
 # install requirements
-RUN pip install -r /tmp/requirements.txt
+RUN pip install --upgrade --force-reinstall pip && pip install --upgrade -r /tmp/requirements.txt
 COPY ./entrypoint.sh /usr/src/myapp/
 COPY manage.py /usr/src/myapp/
 COPY project /usr/src/myapp/project
